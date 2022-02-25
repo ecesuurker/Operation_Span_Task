@@ -1,7 +1,14 @@
-import csv
+from psychopy import visual, event
+from tkinter import *
 
-a = open("Mathdata.csv", "a", newline="")
-f = ["ID", "math_q", "expected", "key_press"]
-b = csv.DictWriter(a, fieldnames=f)
-b.writerow({"ID":"abc", "math_q":"ghg", "expected":"lklk", "key_press":"a"})
-a.close()
+expWin = visual.Window(size=(1366,768),color="grey",units="pix")
+
+textBox = Entry(text="Placeholder text")
+textBox.draw()
+expWin.flip()
+event.waitKeys(keyList=["space"])
+print(data)
+
+expWin.close()
+
+
