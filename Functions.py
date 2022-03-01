@@ -1,5 +1,6 @@
 from psychopy import visual, event, core, gui
 import random, csv, keyboard
+import os
 
 txtColor = "black" #We determine the text color
 
@@ -37,7 +38,8 @@ class Operation_Span_Task():
             line = line.strip()
             lines += line + "\n"
             
-        sent = visual.TextStim(win = self.expWind, color=txtColor, text=lines, height=30)
+        sent = visual.TextStim(win = self.expWind, color=txtColor, text=lines, height=30,
+                               wrapWidth=1000)
         sent.draw()
         self.expWind.flip()
         event.waitKeys(keyList=["space"]) #The instructions appear on the screen until the
@@ -54,8 +56,8 @@ class Operation_Span_Task():
         math = {}
         math["ID"] = self.pNum
         m = self.mathQ[p].split(",")
-        math["math_q"] = m[0]
-        math["expected"] = m[1]
+        math["math_q"] = m[0].strip()
+        math["expected"] = m[1].strip().replace('"','')
         question = visual.TextStim(win = self.expWind, color=txtColor, text=m[0], 
                                    height=30, pos=(0,0))
         self.isi.start(3)
@@ -83,6 +85,7 @@ class Operation_Span_Task():
         the order they were presented to them. The function writes the answers given by
         the participant, name of the stimuli, participant ID to a data file.
         """
+        self.Instructions("N-OST_Instructions.txt")
         stimuli = open(stimuliFile, "r")
         imgNames = []
         for name in stimuli:
@@ -129,6 +132,8 @@ class Operation_Span_Task():
         were presented to them. The function writes the answers given by the participant,
         name of the stimuli, participant ID to a data file.
         """
+        ins = trialType + "_Instructions.txt"
+        self.Instructions(ins)
         stimuli = open(stimuliFile, "r",encoding="utf8")
         words = []
         for word in stimuli:
@@ -166,19 +171,83 @@ class Operation_Span_Task():
             self.OSTdata.writerow(data)
         return p
     
+    def Break(self):
+        """
+        A function that waits between the trials so that participant can take a 5
+        minute break
+        """
+        Break = visual.TextStim(win = self.expWind, color=txtColor, 
+                                text="The trial is over, before moving to next trial you can take a 5 minute break. Press 'space' whenever you are ready to continue",  
+                                   height=30, pos=(0,0), wrapWidth=1000)
+        Break.draw()
+        self.expWind.flip()
+        event.waitKeys(keyList=["space"])
+        return
+    
+    def Test_Trial(self):
+        """
+        A function that presents the participant with test stimuli to help them learn
+        the task.
+        """
+        test = visual.TextStim(win = self.expWind, color=txtColor, 
+                                text="To make the task more clear for you let's give it a try. Now you will be presented with a word and a math question and then asked to write the word to the appearing chatbox. When you are ready press 'space' to see the test trial",  
+                                   height=30, pos=(0,0), wrapWidth=1000)
+        test.draw()
+        self.expWind.flip()
+        event.waitKeys(keyList=["space"])
+        self.isi.start(.5)
+        self.fixation.draw()
+        self.expWind.flip()
+        self.isi.complete()
+        test = visual.TextStim(win = self.expWind, color=txtColor, text="Bilkent",  
+                               height=30, pos=(0,0))
+        self.isi.start(1)
+        test.draw()
+        self.expWind.flip()
+        self.isi.complete()
+        test = visual.TextStim(win = self.expWind, color=txtColor, 
+                               text="(5 + 2) x 3 = 21",  height=30, pos=(0,0))
+        self.isi.start(3)
+        test.draw()
+        self.expWind.flip()
+        self.isi.complete()
+        true = visual.TextStim(win = self.expWind, color=txtColor, text="True", 
+                               pos=(-300, 0), height=30)
+        false = visual.TextStim(win = self.expWind, color=txtColor, text="False", 
+                               pos=(300, 0), height=30)
+        true.draw()
+        false.draw()
+        self.expWind.flip()
+        event.waitKeys(keyList=["a","l"])
+        testInput = gui.Dlg(title="")
+        testInput.addField()
+        dlg = gui.Dlg("Test Trial")
+        dlg.addText("Perfect! You have finished the test trial. Would you like to do it again?")
+        dlg.addField("", choices=["Yes","No"])
+        t = dlg.show()
+        if t[0] == "Yes":
+            return self.Test_Trial()
+        else:
+            return
     def Run(self):
         """
         A function that runs the experiment. It arranges the running order of the 
         functions.
         """
-        self.Instructions("Instructions.txt")
-        direc = r"C:\Users\ece-s\OneDrive\Masaüstü\Senior Project\Operation Span Task\N-OST_Images"
+        self.Instructions("General_Instructions.txt")
+        self.Test_Trial()
+        direc = os.path.realpath(__file__).replace("Functions.py","N-OST_Images")
         trialTypes = ["N-OST","TurkishDaily", "EnglishDaily", "TurkishAcademic", "EnglishAcademic"]
         random.shuffle(trialTypes)
         mathNum = 0
         for trial in trialTypes:
             if trial == "N-OST":
                 mathNum = self.NonLinguistic_OST("N-OST_Stimuli.txt", direc, p=mathNum)
+#                if trialTypes.index(trial) != (len(trialTypes) - 1):
+#                    self.Break()
 #            else:
 #                s = trial + ".txt"
 #                mathNum = self.Linguistic_OST(s, trial, mathNum)
+#                if trialTypes.index(trial) != (len(trialTypes) - 1):
+#                    self.Break()
+#            

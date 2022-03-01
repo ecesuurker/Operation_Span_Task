@@ -1,7 +1,6 @@
 from psychopy import visual, gui #We import the necessary libraries for the experiment
 from Functions import *
 
-
 bgColor = "grey" #We set up the background for the experiment
 expWin = visual.Window(size=(1366,768),color=bgColor,units="pix")
 
@@ -13,6 +12,6 @@ print(PData)
 if not expDlg.OK: #the screen will be closed
     expWin.close()
     
-Operation_Span_Task(PData, expWin).Run()
+Operation_Span_Task(PData[0], expWin).Run()
   
 expWin.close()
