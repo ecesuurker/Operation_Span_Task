@@ -1,8 +1,9 @@
 from psychopy import visual, gui #We import the necessary libraries for the experiment
 from Functions import *
 
-bgColor = "grey" #We set up the background for the experiment
+bgColor = "white" #We set up the background for the experiment
 expWin = visual.Window(size=(1366,768),color=bgColor,units="pix")
+#expWin = visual.Window(fullscr=True, color=bgcolor, units='pix')
 
 expDlg = gui.Dlg(title= "Operation Span Task") #We collect the necessary data from
 expDlg.addText("Participant Info") #participant
