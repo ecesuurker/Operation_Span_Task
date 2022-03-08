@@ -32,7 +32,7 @@ class Operation_Span_Task():
         A function that reads instructions from a specified file and displays them on the
         screen.
         """
-        inst = open(fileName, "r") 
+        inst = open(fileName, "r", encoding="utf8") 
         lines = ""
         for line in inst:
             line = line.strip()
@@ -64,9 +64,9 @@ class Operation_Span_Task():
         question.draw()
         self.expWind.flip()
         self.isi.complete()
-        true = visual.TextStim(win = self.expWind, color=txtColor, text="True", 
+        true = visual.TextStim(win = self.expWind, color=txtColor, text="Doğru", 
                                pos=(-300, 0), height=30)
-        false = visual.TextStim(win = self.expWind, color=txtColor, text="False", 
+        false = visual.TextStim(win = self.expWind, color=txtColor, text="Yanlış", 
                                pos=(300, 0), height=30)
         true.draw()
         false.draw()
@@ -119,6 +119,10 @@ class Operation_Span_Task():
             dataInput = gui.Dlg(title="")
             dataInput.addField()
             inp = dataInput.show()
+            while not dataInput.OK:
+                dataInput = gui.Dlg(title="")
+                dataInput.addField()
+                inp = dataInput.show()
             data["answers"] = inp[0]
             self.OSTdata.writerow(data)
         return p
@@ -132,8 +136,7 @@ class Operation_Span_Task():
         were presented to them. The function writes the answers given by the participant,
         name of the stimuli, participant ID to a data file.
         """
-        ins = trialType + "_Instructions.txt"
-        self.Instructions(ins)
+        self.Instructions("L-OST_Instructions.txt")
         stimuli = open(stimuliFile, "r",encoding="utf8")
         words = []
         for word in stimuli:
@@ -167,6 +170,10 @@ class Operation_Span_Task():
             dataInput = gui.Dlg(title="")
             dataInput.addField()
             inp = dataInput.show()
+            while not dataInput.OK:
+                dataInput = gui.Dlg(title="")
+                dataInput.addField()
+                inp = dataInput.show()
             data["answers"] = inp[0]
             self.OSTdata.writerow(data)
         return p
@@ -177,7 +184,7 @@ class Operation_Span_Task():
         minute break
         """
         Break = visual.TextStim(win = self.expWind, color=txtColor, 
-                                text="The trial is over, before moving to next trial you can take a 5 minute break. Press 'space' whenever you are ready to continue",  
+                                text="Bu bölüm sona erdi. Eğer ara vermek istiyorsanız lütfen şimdi verin. Devam etmek istediğinizde 'space' tuşuna basınız.",  
                                    height=30, pos=(0,0), wrapWidth=1000)
         Break.draw()
         self.expWind.flip()
@@ -190,7 +197,7 @@ class Operation_Span_Task():
         the task.
         """
         test = visual.TextStim(win = self.expWind, color=txtColor, 
-                                text="To make the task more clear for you let's give it a try. Now you will be presented with a word and a math question and then asked to write the word to the appearing chatbox. When you are ready press 'space' to see the test trial",  
+                                text="Deneyi daha anlaşılır kılmak için şimdi size bir deneme gösterilecektir. Şimdi size bir kelime ve matematik sorusu gösterilecektir. Matematik sorusu ekrandan kaybolduktan sonra, sorunun doğru çözülüp çözülmediğini belirtmeniz istenecektir. Sonrasında ise ortaya çıkan ekrana gördüğünüz kelimeyi yazmanız istenecektir. Hazır olduğunuzda 'space' tuşuna basarak denemeyi başlatabilirsiniz.",  
                                    height=30, pos=(0,0), wrapWidth=1000)
         test.draw()
         self.expWind.flip()
@@ -211,9 +218,9 @@ class Operation_Span_Task():
         test.draw()
         self.expWind.flip()
         self.isi.complete()
-        true = visual.TextStim(win = self.expWind, color=txtColor, text="True", 
+        true = visual.TextStim(win = self.expWind, color=txtColor, text="Doğru", 
                                pos=(-300, 0), height=30)
-        false = visual.TextStim(win = self.expWind, color=txtColor, text="False", 
+        false = visual.TextStim(win = self.expWind, color=txtColor, text="Yanlış", 
                                pos=(300, 0), height=30)
         true.draw()
         false.draw()
@@ -221,14 +228,22 @@ class Operation_Span_Task():
         event.waitKeys(keyList=["a","l"])
         testInput = gui.Dlg(title="")
         testInput.addField()
-        dlg = gui.Dlg("Test Trial")
-        dlg.addText("Perfect! You have finished the test trial. Would you like to do it again?")
-        dlg.addField("", choices=["Yes","No"])
-        t = dlg.show()
-        if t[0] == "Yes":
-            return self.Test_Trial()
+        output = testInput.show()
+        if testInput.OK:
+            dlg = gui.Dlg("Test Trial")
+            dlg.addText("Harika! Denemeyi bitirdiniz. Denemeyi bir daha yapmak ister misiniz?")
+            dlg.addField("", choices=["Evet","Hayır"])
+            t = dlg.show()
+            if t[0] == "Evet":
+                return self.Test_Trial()
+            else:
+                return
         else:
-            return
+            while not testInput.OK:
+                testInput = gui.Dlg(title="")
+                testInput.addField()
+                output = testInput.show()
+            
     def Run(self):
         """
         A function that runs the experiment. It arranges the running order of the 
@@ -243,11 +258,10 @@ class Operation_Span_Task():
         for trial in trialTypes:
             if trial == "N-OST":
                 mathNum = self.NonLinguistic_OST("N-OST_Stimuli.txt", direc, p=mathNum)
-#                if trialTypes.index(trial) != (len(trialTypes) - 1):
-#                    self.Break()
-#            else:
-#                s = trial + ".txt"
-#                mathNum = self.Linguistic_OST(s, trial, mathNum)
-#                if trialTypes.index(trial) != (len(trialTypes) - 1):
-#                    self.Break()
-#            
+                if trialTypes.index(trial) != (len(trialTypes) - 1):
+                    self.Break()
+            else:
+                s = trial + ".txt"
+                mathNum = self.Linguistic_OST(s, trial, mathNum)
+                if trialTypes.index(trial) != (len(trialTypes) - 1):
+                    self.Break()         

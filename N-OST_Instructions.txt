@@ -1,5 +1,3 @@
-This trial will consist of 12 blocks that consist of images that you need to remember.
-Each block will consist of 2 to 5 images and after each block you will be asked to
-write the images that you were presented in that block. Each image will be succeeded
-by a mathematical question that you need to indicate whether it is solved correctly
-or not. 
+Bu bölüm sonradan hatırlamanız gerekecek resimler içeren 12 adet bloktan oluşacaktır. Her blokta matematik soruları ve resimler göreceksiniz ve her bloktan sonra sizden o blokta gördüğünüz resimleri yazmanız istenecektir. Aynı zamanda, her matematik sorusu kaybolduktan sonra sorunun doğru bir şekilde çözülüp çözülmediğini belirtmeniz gerektiğini unutmayın.
+
+Kolay gelsin!

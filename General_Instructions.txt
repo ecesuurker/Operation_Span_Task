@@ -1,11 +1,6 @@
-In this experiment, you will be presented with a series of images or words that you will need to remember.
-There will be 5 different trials that consist of 12 blocks, after each trial you will be given the chance
-to take a break. Each block will consist of 2 to 5 images or words, and after each block you will be asked
-to write the names of the words or images that you were presented with in that trial. Each image and word 
-will be succeeded by a simple mathematics question that will be presented for 3 seconds. After that point
-the math question will disappear and you will be asked to indicate whether the math question is correct or
-not. If it is correct, please press "a", if it is wrong please press "l". "True" and "False" labels will 
-be presented on the side of the associated key, so if you forget you can just press to the button that is
-on the side of the label. 
+Bu deneyde size farklı resimler ve kelimeler gösterilecek, ve sizden bu resimleri ve kelimeleri hatırlamanız beklenecektir. Deney toplamda 5 bölümden oluşmaktadır ve her bölümde 12 adet blok bulunmaktadır.
+Her blokta ilk önce bir resim ya da kelime göreceksiniz. Resim/kelime ekrandan kaybolduktan sonra 3 saniye boyunca basit bir matematik sorusu göreceksiniz. Bu sürenin sonunda soru ekrandan kaybolacak ve sizden sorunun cevabının doğru olup olmadığını belirtmeniz istenecektir. Eğer soru doğru çözüldüyse "A"ya basmanız gerekmektedir (ekranda bu tuşun olduğu kısımda "doğru" yazacaktır.), eğer yanlışsa "L"ye basmanız gerekmektedir (ekranda bu tuşun olduğu kısımda "yanlış" yazacaktır.). Bir bloktaki bütün matematik soruları ve kelimeler/resimler gösterildikten sonra o blokta gösterilen kelimeleri ve resimleri ayrı bir ekrana yazmanız istenecektir. 
 
-Good Luck!
+Eğer herhangi bir sorunuz varsa lütfen araştırmacıya sorun.
+
+İyi şanslar!
