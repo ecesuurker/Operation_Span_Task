@@ -1,5 +1,0 @@
-This trial will consist of 12 blocks that consist of words that you need to remember.
-Each block will consist of 2 to 5 words and after each block you will be asked to
-write the words that you were presented in that block. Each word will be succeeded
-by a mathematical question that you need to indicate whether it is solved correctly
-or not. 
