@@ -26,7 +26,7 @@ class Operation_Span_Task():
         mfield = ["ID", "math_q", "expected", "key_press"] #for math questions
         self.mathData = csv.DictWriter(mFile, fieldnames=mfield)
         self.blocknumbers = [2, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5, 5]
-        part_fileName = "participant_results/OSTdata_" + str(ParticipantNumber) +".csv" #The responses of each
+        part_fileName = "data/OSTdata_" + str(ParticipantNumber) +".csv" #The responses of each
         part_file = open(part_fileName, "w", newline="") #participant will be also
         self.partData = csv.DictWriter(part_file, fieldnames=field) #recorded to a separate
         self.partData.writeheader()                                #file
