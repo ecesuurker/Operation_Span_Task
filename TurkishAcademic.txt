@@ -38,5 +38,5 @@ Fare
 Ekran
 Bilgisayar
 Tartışma
-Bölge
+Başlık
 Ekle

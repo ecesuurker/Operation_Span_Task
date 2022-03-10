@@ -26,6 +26,10 @@ class Operation_Span_Task():
         mfield = ["ID", "math_q", "expected", "key_press"] #for math questions
         self.mathData = csv.DictWriter(mFile, fieldnames=mfield)
         self.blocknumbers = [2, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5, 5]
+        part_fileName = "participant_results/OSTdata_" + str(ParticipantNumber) +".csv" #The responses of each
+        part_file = open(part_fileName, "w", newline="") #participant will be also
+        self.partData = csv.DictWriter(part_file, fieldnames=field) #recorded to a separate
+        self.partData.writeheader()                                #file
         
     def Instructions(self, fileName):
         """
@@ -105,7 +109,7 @@ class Operation_Span_Task():
             data["block_number"] = block
             stm = ""
             for i in range(block):
-                stm = stm + imgNames[a]
+                stm = stm + imgNames[a].replace(".jpg",";")
                 img = directory + "\\" + imgNames[a]
                 i = visual.ImageStim(self.expWind, pos=(0,0), size=[300,300], image=img)
                 self.isi.start(1)
@@ -125,6 +129,7 @@ class Operation_Span_Task():
                 inp = dataInput.show()
             data["answers"] = inp[0]
             self.OSTdata.writerow(data)
+            self.partData.writerow(data)
         return p
             
     def Linguistic_OST(self, stimuliFile, trialType, p=0):
@@ -176,15 +181,16 @@ class Operation_Span_Task():
                 inp = dataInput.show()
             data["answers"] = inp[0]
             self.OSTdata.writerow(data)
+            self.partData.writerow(data)
         return p
     
-    def Break(self):
+    def Break(self, trialNum):
         """
         A function that waits between the trials so that participant can take a 5
         minute break
         """
         Break = visual.TextStim(win = self.expWind, color=txtColor, 
-                                text="Bu bölüm sona erdi. Eğer ara vermek istiyorsanız lütfen şimdi verin. Devam etmek istediğinizde 'space' tuşuna basınız.",  
+                                text= str(trialNum) + ". bölüm sona erdi. Eğer ara vermek istiyorsanız lütfen şimdi verin. Devam etmek istediğinizde 'space' tuşuna basınız.",  
                                    height=30, pos=(0,0), wrapWidth=1000)
         Break.draw()
         self.expWind.flip()
@@ -232,7 +238,7 @@ class Operation_Span_Task():
         if testInput.OK:
             dlg = gui.Dlg("Test Trial")
             dlg.addText("Harika! Denemeyi bitirdiniz. Denemeyi bir daha yapmak ister misiniz?")
-            dlg.addField("", choices=["Evet","Hayır"])
+            dlg.addField("", choices=["Hayır","Evet"])
             t = dlg.show()
             if t[0] == "Evet":
                 return self.Test_Trial()
@@ -259,9 +265,15 @@ class Operation_Span_Task():
             if trial == "N-OST":
                 mathNum = self.NonLinguistic_OST("N-OST_Stimuli.txt", direc, p=mathNum)
                 if trialTypes.index(trial) != (len(trialTypes) - 1):
-                    self.Break()
-            else:
-                s = trial + ".txt"
-                mathNum = self.Linguistic_OST(s, trial, mathNum)
-                if trialTypes.index(trial) != (len(trialTypes) - 1):
-                    self.Break()         
+                    self.Break(int(trialTypes.index(trial)) + 1)
+#            else:
+#                s = trial + ".txt"
+#                mathNum = self.Linguistic_OST(s, trial, mathNum)
+#                if trialTypes.index(trial) != (len(trialTypes) - 1):
+#                    self.Break(int(trialTypes.index(trial))) 
+        end = visual.TextStim(win = self.expWind, color=txtColor, 
+                                text="Deney sona erdi. Katıldığınız için teşekkür ederiz. Araştırmacıya deneyin bittiğini haber verebilirsiniz. \n Çıkmak için 'space' tuşuna basınız.",  
+                                   height=30, pos=(0,0), wrapWidth=1000)
+        end.draw()
+        self.expWind.flip()
+        event.waitKeys(keyList=["space"])

@@ -14,7 +14,7 @@ Chapter
 Senior
 Journal
 Curriculum
-Schedule
+Footer
 Quiz
 Citation
 Semester
@@ -35,7 +35,7 @@ Fail
 Takehome
 Lecture
 Desk
-Admission
+Header
 Laptop
 Spare
 Rejection
