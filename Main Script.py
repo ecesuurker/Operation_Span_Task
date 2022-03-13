@@ -1,5 +1,6 @@
 from psychopy import visual, gui #We import the necessary libraries for the experiment
 from Functions import *
+import webbrowser
 
 bgColor = "white" #We set up the background for the experiment
 expWin = visual.Window(size=(1366,768),color=bgColor,units="pix")
@@ -16,3 +17,5 @@ if not expDlg.OK: #the screen will be closed
 Operation_Span_Task(PData[0], expWin).Run()
   
 expWin.close()
+
+webbrowser.open('https://forms.gle/MXoC2H7NuXyM8ni86')
