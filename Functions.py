@@ -161,7 +161,7 @@ class Operation_Span_Task():
             data["block_number"] = block
             stm = ""
             for i in range(block):
-                stm = stm + words[a]
+                stm = stm + words[a] + ";"
                 w = visual.TextStim(win = self.expWind, color=txtColor, text=words[a], 
                                pos=(0, 0), height=30)
                 self.isi.start(1)
@@ -236,10 +236,11 @@ class Operation_Span_Task():
         testInput.addField()
         output = testInput.show()
         if testInput.OK:
-            dlg = gui.Dlg("Test Trial")
+            dlg = gui.Dlg("Deneme")
             dlg.addText("Harika! Denemeyi bitirdiniz. Denemeyi bir daha yapmak ister misiniz?")
             dlg.addField("", choices=["Hayır","Evet"])
             t = dlg.show()
+            print(t)
             if t[0] == "Evet":
                 return self.Test_Trial()
             else:
@@ -266,11 +267,11 @@ class Operation_Span_Task():
                 mathNum = self.NonLinguistic_OST("N-OST_Stimuli.txt", direc, p=mathNum)
                 if trialTypes.index(trial) != (len(trialTypes) - 1):
                     self.Break(int(trialTypes.index(trial)) + 1)
-#            else:
-#                s = trial + ".txt"
-#                mathNum = self.Linguistic_OST(s, trial, mathNum)
-#                if trialTypes.index(trial) != (len(trialTypes) - 1):
-#                    self.Break(int(trialTypes.index(trial))) 
+            else:
+                s = trial + ".txt"
+                mathNum = self.Linguistic_OST(s, trial, mathNum)
+                if trialTypes.index(trial) != (len(trialTypes) - 1):
+                    self.Break(int(trialTypes.index(trial)) + 1) 
         end = visual.TextStim(win = self.expWind, color=txtColor, 
                                 text="Deney sona erdi. Katıldığınız için teşekkür ederiz. Araştırmacıya deneyin bittiğini haber verebilirsiniz. \n Çıkmak için 'space' tuşuna basınız.",  
                                    height=30, pos=(0,0), wrapWidth=1000)

@@ -1,6 +1,8 @@
 Bu deneyde size farklı resimler ve kelimeler gösterilecek, ve sizden bu resimleri ve kelimeleri hatırlamanız beklenecektir. Deney toplamda 5 bölümden oluşmaktadır ve her bölümde 12 adet blok bulunmaktadır.
-Her blokta ilk önce bir resim ya da kelime göreceksiniz. Resim/kelime ekrandan kaybolduktan sonra 3 saniye boyunca basit bir matematik sorusu göreceksiniz. Bu sürenin sonunda soru ekrandan kaybolacak ve sizden sorunun cevabının doğru olup olmadığını belirtmeniz istenecektir. Eğer soru doğru çözüldüyse "A"ya basmanız gerekmektedir (ekranda bu tuşun olduğu kısımda "doğru" yazacaktır.), eğer yanlışsa "L"ye basmanız gerekmektedir (ekranda bu tuşun olduğu kısımda "yanlış" yazacaktır.). Bir bloktaki bütün matematik soruları ve kelimeler/resimler gösterildikten sonra o blokta gösterilen kelimeleri ve resimleri ayrı bir ekrana yazmanız istenecektir. 
+Her blokta ilk önce bir resim ya da kelime göreceksiniz. Resim/kelime ekrandan kaybolduktan sonra 3 saniye boyunca basit bir matematik sorusu göreceksiniz. Bu sürenin sonunda soru ekrandan kaybolacak ve sizden sorunun cevabının doğru olup olmadığını belirtmeniz istenecektir. Eğer soru doğru çözüldüyse "A"ya basmanız gerekmektedir (ekranda bu tuşun olduğu kısımda "doğru" yazacaktır.), eğer yanlışsa "L"ye basmanız gerekmektedir (ekranda bu tuşun olduğu kısımda "yanlış" yazacaktır.). Bir bloktaki bütün matematik soruları ve kelimeler/resimler gösterildikten sonra o blokta gösterilen kelimeleri ve resimleri virgül ile ayırarak ayrı bir ekrana yazmanız istenecektir. 
 
 Eğer herhangi bir sorunuz varsa lütfen araştırmacıya sorun.
 
 İyi şanslar!
+
+Bu ekranı geçmek için "space" tuşuna basınız.
