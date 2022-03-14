@@ -19,3 +19,7 @@ Operation_Span_Task(PData[0], expWin).Run()
 expWin.close()
 
 webbrowser.open('https://forms.gle/MXoC2H7NuXyM8ni86')
+
+ge_point = input("GE puanı istiyor musunuz? (evet/hayır)")
+if ge_point.lower() == "evet":
+    webbrowser.open('https://forms.gle/HXJgCfGs3Ks7HpfB7')
